@@ -24,6 +24,7 @@ async function run() {
         const ordersCollection = database.collection('orders');
         const customerReviewCollection = database.collection('review');
         const userCollection = database.collection('user');
+        const GalaryCollection = database.collection('galary');
 
         // Get api
         app.get('/packages', async (req, res) => {
@@ -110,6 +111,26 @@ async function run() {
             res.json(result);
 
         });
+
+
+        
+        // POST Galary imaage
+        app.post('/galary', async (req, res) => {
+            const galary = req.body;
+            const result = await GalaryCollection.insertOne(galary);
+            res.json(result);
+
+        });
+
+
+           // get all Galary 
+           app.get('/galary', async (req, res) => {
+            const cursor = GalaryCollection.find({});
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+
 
 
         // Delete package 
