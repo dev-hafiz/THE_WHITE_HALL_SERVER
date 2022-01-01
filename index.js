@@ -105,7 +105,7 @@ async function run() {
 
         // POST packages
         app.post('/packages', async (req, res) => {
-            const service = req.body;
+            const package = req.body;
             const result = await packagesCollection.insertOne(package);
             res.json(result);
 
