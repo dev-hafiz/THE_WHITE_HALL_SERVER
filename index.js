@@ -168,6 +168,21 @@ async function run() {
             res.send(result);
         });
 
+    //     //--- start other code ---
+    //      //ADMIN CONDITIONALLY RENDERED
+    //      app.get('/checkAdmin/:email', async(req, res) =>{
+    //         const email = req.params.email;
+    //         console.log(email)
+    //         const query = {email: email};
+    //         const user = await userCollection.findOne(query)
+    //          let isAdmin = false;
+    //         if(user?.role === 'admin'){
+    //              isAdmin = true;
+    //         }
+    //         res.json({admin: isAdmin});
+    //    })
+   //--- end other code ---
+
 
 
         // update order status 
