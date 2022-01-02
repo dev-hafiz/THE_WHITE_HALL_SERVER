@@ -25,6 +25,7 @@ async function run() {
         const customerReviewCollection = database.collection('review');
         const userCollection = database.collection('user');
         const GalaryCollection = database.collection('galary');
+        const bookCenterCollection = database.collection('bookCenter');
 
         // Get api
         app.get('/packages', async (req, res) => {
@@ -41,6 +42,32 @@ async function run() {
 
         })
 
+
+ // POST Booking Center Info
+ app.post('/bookCenter', async (req, res) => {
+    const bookCenter = req.body;
+    const result = await bookCenterCollection.insertOne(bookCenter);
+    res.json(result);
+
+});
+
+
+        
+          // Get api for Booking Center
+          app.get('/bookCenter', async (req, res) => {
+            const cursor = bookCenterCollection.find({});
+            const bookCenter = await cursor.toArray();
+            res.send(bookCenter);
+        })
+
+        // Get singel Booking Center
+        app.get('/bookCenter/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const bookCenter = await bookCenterCollection.findOne(query);
+            res.json(bookCenter)
+
+        })
 
         // make order 
         app.post('/addOrders', async (req, res) => {
@@ -139,6 +166,18 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await packagesCollection.deleteOne(query);
+            res.json(result);
+
+
+        })
+
+        
+        // Delete bookCenter Package 
+
+        app.delete('/bookCenter/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await bookCenterCollection.deleteOne(query);
             res.json(result);
 
 
