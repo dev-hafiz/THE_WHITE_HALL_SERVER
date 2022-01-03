@@ -5,7 +5,7 @@ const cors = require("cors");
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRYPE_SECRET);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7000;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -175,20 +175,7 @@ async function run() {
       res.send(result);
     });
 
-    //     //--- start other code ---
-    //      //ADMIN CONDITIONALLY RENDERED
-    //      app.get('/checkAdmin/:email', async(req, res) =>{
-    //         const email = req.params.email;
-    //         console.log(email)
-    //         const query = {email: email};
-    //         const user = await userCollection.findOne(query)
-    //          let isAdmin = false;
-    //         if(user?.role === 'admin'){
-    //              isAdmin = true;
-    //         }
-    //         res.json({admin: isAdmin});
-    //    })
-    //--- end other code ---
+
 
     // update cart Product by email
     app.put("/bookedService/:email", async (req, res) => {
@@ -245,4 +232,5 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log("Running server is port", port);
+
 });
